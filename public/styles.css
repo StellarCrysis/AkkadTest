@@ -4,7 +4,7 @@ html, body {
   height: 100%;
 }
 
-#canvas-container {
+#outer-container {
   display: flex;
   width: 100%;
   height: 100%;
@@ -13,9 +13,15 @@ html, body {
   background-color: #000000;
 }
 
-#view {
+#canvas-container {
   display: flex;
+  position: relative;
   width: 1024px;
   height: 576px;
   outline: none;
+}
+
+#canvas-container canvas {
+  width: 100%;
+  height: 100%;
 }

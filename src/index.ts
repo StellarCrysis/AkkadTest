@@ -1,8 +1,9 @@
 import * as akkad from "akkad"
+import { Game } from "akkad"
 
 class GameState extends akkad.BaseState {
     async enter(): Promise<void> {
-        game.showLoadingScreen()
+        Game.showLoadingScreen()
 
         const camera = new akkad.BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 3, new akkad.BABYLON.Vector3(0, 0, 2.5), this.mainscene)
         camera.attachControl(this.canvas)
@@ -12,9 +13,15 @@ class GameState extends akkad.BaseState {
         let cube = akkad.BABYLON.MeshBuilder.CreateBox("box", {
             size: 2
         }, this.mainscene)
+
+        Game.hideLoadingScreen()
     }
 }
 
-let game = new akkad.Game(document.getElementById("canvas-container"))
+Game.init(document.getElementById("outer-container"))
+Game.setLoadingScreen(new akkad.DefaultLoadingScreen({
+    caption: "Загрузка"
+}))
+
 let state = new GameState()
-game.setState(state)
+Game.setState(state)
